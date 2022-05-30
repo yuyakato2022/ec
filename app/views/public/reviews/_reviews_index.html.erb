@@ -1,0 +1,31 @@
+<% item.reviews.reverse.each do |review|%>
+  <div class="border border-dark mb-3">
+    <div class="bg-dark p-3">
+      <span><%= review.title %></span>
+      <div id="star-rate<%= review.id %>", class="float-right"></div>
+      <script>
+        $('#star-rate<%= review.id %>').raty({
+          size      : 36,
+          starOff   : '<%= asset_path('star-off.png') %>',
+          starOn    : '<%= asset_path('star-on.png') %>',
+          starHalf : '<%= asset_path('star-half') %>',
+          half      : true,
+          readOnly: true,
+          score: <%= review.star %>,
+        });
+      </script>
+    </div>
+    <div class="bg-light text-dark p-4">
+      <div>
+        <%= review.body %>
+      </div>
+      <div class="text-right mt-2">
+        <%= review.updated_at.strftime('%Y/%m/%d %H:%M') %>
+        <%= review.customer.nick_name %>
+        <% if review.customer == current_customer %>
+          <%= link_to "削除", item_review_path(review.item, review), remote: true, method: :delete, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

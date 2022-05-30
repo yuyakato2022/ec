@@ -1,0 +1,51 @@
+<!--public.cssの.topと.top-imageと消したい-->
+<h3 class="text-center"><strong>ようこそ、ながのCAKEへ！</strong></h3>
+<div class="fadeslide ">
+  <div><%= image_tag "oji", size: "600x400" %></div>
+  <div><%= image_tag "mugi", size: "600x400" %></div>
+  <div><%= image_tag "taru", size: "600x400" %></div>
+  <div><%= image_tag "beer",ize: "600x400" %></div>
+  <div><%= image_tag "kanpai", size: "600x400" %></div>
+  <div><%= image_tag "mol", size: "600x400" %></div>
+</div>
+<p class="text-center top_message">
+  <strong>
+    このサイトは、ケーキ販売のECサイトになります。<br>
+    会員でない方も商品の閲覧はできますが、<br>
+    購入には会員登録が必要になります。
+  </strong>
+</p>
+
+<h3 class="mx-2 new" style=""><i class="fas fa-angle-double-right"></i> New Item</h3>
+<div class="new_item">
+  <% @newitems.each do |item| %>
+    <div class="tag">
+      <%= link_to item_path(item) do %>
+        <div class="huti1">
+          <div class="huti2">
+            <div class="huti3">
+              <div class="huti4">
+                <%=image_tag item.get_image(180,180) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="batman d-flex align-items-center">
+        <div class="bat">
+          <p>
+            <%= item.name %><br>
+            ¥<%= (item.price * 1.1).floor.to_s(:delimited) %>(税込み)
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<p class="text-right" style="margin:50px;">
+  <strong>
+    <%= link_to items_path, style: "color:white;"  do %>
+      全ての商品を見る <i class="fas fa-angle-double-right"></i>
+    <% end %>
+  </strong>
+</p>

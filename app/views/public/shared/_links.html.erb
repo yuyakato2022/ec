@@ -1,0 +1,7 @@
+<%- if controller_name != 'sessions' %>
+  <strong><%= link_to "ログイン", new_session_path(resource_name),class: "btn btn-outline-light btn-lg" %></strong>してください。
+<% end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+   <strong><%= link_to "新規登録", new_registration_path(resource_name),class: "btn btn-outline-light btn-lg" %></strong>を行ってください。
+<% end %>

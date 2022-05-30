@@ -1,0 +1,59 @@
+<div class="container">
+
+  <div class="row border-bottom">
+    <div class="col-lg-3 text-center">
+      <p class="border p-2"><strong>ジャンル検索</strong></p>
+    </div>
+    <% @genres.each do |genre| %>
+        <%= link_to items_path(genre_id: genre.id), class: 'nav-link' do %>
+          <i class="fas fa-birthday-cake"></i><%= genre.name %><br>
+        <% end %>
+    <% end %>
+  </div>
+
+  <div class="row mt-4 mb-4">
+    <h3>
+      <% if @genre.present? %>
+        <%= @genre.name %>
+      <% else %>
+        商品一覧
+      <% end %>
+      (全<%= @items.count %>件)
+    </h3>
+  </div>
+
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-lg-4 mb-5">
+        <div class="new_item">
+          <div class="tag">
+            <%= link_to item_path(item.id),class: "text-decoration-none" do %>
+              <div class="huti1">
+              <div class="huti2">
+              <div class="huti3">
+              <div class="huti4">
+              <%= image_tag item.get_image(200, 150) %>
+              </div>
+              </div>
+              </div>
+              </div>
+            <% end %>
+            <div class="index">
+              <div class="bat-index ">
+                <p><%= item.name %></p>
+                <p>￥<%= (item.price * 1.1).floor.to_s(:delimited) %>(税込み)</p>
+                <div class="favorite-btn_<%= item.id %>">
+                  <%= render 'public/favorites/favorite', item: item %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="kaminari">
+     <%= paginate @items %>
+  </div>
+</div>
+

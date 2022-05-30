@@ -1,0 +1,9 @@
+.kaminari {
+  display: flex;
+  justify-content:center;
+  margin-top: 10px;
+}
+.field_with_errors {
+  display: contents;
+}
+

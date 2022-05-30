@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg-3 left">
+      <p class="border text-center p-3"><strong>ジャンル検索</strong></p>
+      <% @genres.each do |genre| %>
+        <%= link_to items_path(genre_id: genre.id), class: 'nav-link' do %><br>
+          <i class="fas fa-birthday-cake"></i>　<%= genre.name %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="col-lg-7 offset-1">
+      <div class="huti1">
+      <div class="huti2">
+      <div class="huti3">
+      <div class="huti4">
+        <%= image_tag @item.get_image(450,330) %>
+      </div>
+      </div>
+      </div>
+      </div>
+
+      <div class="show">
+        <div class="bat-show">
+          <div class="my-4 ml-3">
+            <h3><%= @item.name %></h3>
+            <%= @item.description %>
+          </div>
+          <div class="ml-3">
+            <p><span class="font-weight-bold">￥<%= (@item.price * 1.1).floor %>(税込み)</span></p>
+            <div class="favorite-btn_<%= @item.id %>"><%= render 'public/favorites/favorite', item: @item %></div>
+          </div>
+        </div>
+      </div>
+
+      <% if customer_signed_in? %>
+        <%= form_with model:@cart_item, url: '/cart_items/', method: :post, local:true do |f| %>
+          <div class="show mt-4">
+            <div class="form-group">
+              <%= f.hidden_field :item_id, :value => @item.id %>
+              <%= f.select :quantity, *[1..10] %>
+            </div>
+            <div class="form-group offset-1">
+              <%= f.submit "カートに入れる", class: 'btn btn-success' %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+
+
+  <div class="row mt-5">
+    <% if customer_signed_in? && @item.reviews.exists? %>
+      <div class="col-lg-4 mr-3">
+        <div class"row mb-3"><h3>レビュー投稿</h3></div>
+        <div class"row"><%= render 'public/reviews/form', item: @item,review: @review %></div>
+      </div>
+      <div class="col-lg-7">
+        <div class"row mb-3"><h3>お客様の声</h3></div>
+        <div class"review_index_<%= @item.id %>">
+           <%= render 'public/reviews/reviews_index', item: @item %>
+        </div>
+      </div>
+    <% elsif customer_signed_in? %>
+      <div class="col-lg-4 mr-3">
+        <div class"row mb-3"><h3>レビュー投稿</h3></div>
+        <div class"row"><%= render 'public/reviews/form', item: @item,review: @review %></div>
+      </div>
+    <% elsif @item.reviews.exists? %>
+      <div class="col-lg-8 offset-2 mt-5 mb-3">
+        <div class"row mb-3"><h3>お客様の声</h3></div>
+        <div class"review_index_<%= @item.id %>">
+          <%= render 'public/reviews/reviews_index', item: @item %>
+        </div>
+      </div>
+    <% else %>
+    <% end %>
+  </div>
+</div>

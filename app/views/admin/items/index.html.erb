@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row mt-5 mb-3">
+    <div class="col-lg-6">
+      <h3 class="mini-title">商品一覧</h3>
+    </div>
+    <div class="col-lg-6">
+      <%= link_to new_admin_item_path, class: "btn btn-outline-primary btn-lg btn-block" do  %>
+        <i class="fas fa-birthday-cake"></i>　新規商品登録　<i class="fas fa-birthday-cake"></i>
+      <% end %>
+    </div>
+  </div>
+  
+
+  <div class="row text-center">
+    <div class="col-lg-12">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <th>商品ID</th>
+          <th>商品画像</th>
+          <th>商品名</th>
+          <th>税抜価格</th>
+          <th>ジャンル</th>
+          <th>ステータス</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.id %></td>
+              <td><%= image_tag item.get_image(80,80) %></td>
+              <td><%= link_to admin_item_path(item.id) do %>
+                    <%= item.name %>
+                  <% end %></td>
+              <td>¥ <%= item.price.to_s(:delimited) %></td>
+              <td>
+                <%= item.genre.name %>
+              </td>
+              <td>
+                <% if item.is_active == true %>
+                  <span class="text-success">販売中</span>
+                <% else %>
+                  <span class="text-danger">販売停止</spn>
+                <% end %>
+              </td>
+              <td><%= link_to "編集する", edit_admin_item_path(item), class: "btn btn-success"  %></td>
+              </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="kaminari">
+    <%= paginate @items %>
+  </div>
+</div>

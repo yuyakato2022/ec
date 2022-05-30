@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <h3 class="mini-title">ジャンル追加</h3>
+  </div>
+
+  <%= render 'layouts/errors', obj: @genre %>
+
+  <div class="text-right">
+    <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
+      <div class="form-group row ml-5">
+        <%= f.label :name,"ジャンル", class: "col-lg-3" %>
+        <%= f.text_field :name, class: "form-control col-lg-3" %>
+        <div class="col-lg-3">
+          <%= f.submit '新規追加',class:"btn btn-success btn-block" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row justify-content-center mt-5 mb-3">
+    <h3 class="mini-title">ジャンル一覧</h3>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-lg-6 offset-3">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <th>ジャンル名</th>
+          <th>商品数</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+            <tr>
+              <td><%= genre.name %></td>
+              <td><%= genre.items.count %></td>
+              <td><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-success" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

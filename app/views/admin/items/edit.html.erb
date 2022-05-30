@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <h3 class="mini-title">商品編集</h3>
+  </div>
+  <%= render 'layouts/errors', obj: @item %>
+
+  <div class="text-right m-5 offset-3">
+    <%= form_with model: @item, url: admin_item_path(@item), method: :patch do |f| %>
+      <div class="form-group row">
+        <%= f.label :name,"商品名", class: "col-lg-4" %>
+        <%= f.text_field :name, class: "col-lg-4" %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :image,"商品画像", class: "col-lg-4" %>
+        <%= f.file_field :image, class: "col-4", accept: "image/*" %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :description,"商品説明", class: "col-lg-4" %>
+        <%= f.text_area :description, size: "60x10", class: "col-lg-4" %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :genre_id,"ジャンル", class: "col-lg-4" %>
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択してください", class: "col-lg-4" %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :proce,"税抜き価格", class: "col-lg-4" %>
+        <%= f.text_field :price, class: "col-lg-4" %>円
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :is_active,"販売ステータス", class: "col-lg-4" %>
+        <span>
+          <%= f.radio_button :is_active, true %>
+          <%= f.label :is_active, '販売中', value: true %>
+        </span>
+        <span>
+          <%= f.radio_button :is_active, false %>
+          <%= f.label :is_active, '販売停止中', value: false %>
+        </span>
+      </div>
+      <div class="row justify-content-center mb-5">
+        <div class="col-2">
+          <%= f.submit '編集登録',class:"btn btn-btn btn-success btn-block" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row justify-content-center mb-5">
+    <%= link_to "戻る", admin_item_path(@item) %>
+  </div>
+</div>
+

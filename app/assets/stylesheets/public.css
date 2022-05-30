@@ -1,0 +1,238 @@
+/*全体に適用する部分のCSS始まり*/
+main {
+  background-image:url('ka1'),url('syansyan4'),url('ka2');
+  background-repeat: no-repeat;
+  background-size: 250px 900px,250px 250px,250px 900px;
+  background-position: left,top right,right;
+  background-attachment: fixed;
+  color: white;
+  background-color:#666666;
+  padding-bottom:30px;
+}
+
+.yield {
+  width: 930px;
+  padding: 50px 0;
+  margin: 0 auto;
+}
+
+.navbar {
+  padding: 0;
+}
+
+.text-decoration-none {
+  color: #FFFFFF;
+}
+
+.footer {
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  background-image: url('pole.png');
+  background-repeat: repeat-x;
+  background-size: 400px 200px;
+}
+
+/*全体に適用する部分のCSS終わり*/
+
+
+/*トップページのCSS始まり*/
+
+.top_message {
+  padding: 20px;
+}
+
+.new_item {
+  display: flex;
+}
+
+.tag {
+  margin-right:70px;
+}
+
+/*トップページのスライドショー始まり*/
+.fadeslide {
+  display: flex;
+  margin: auto;
+	position: relative;
+	width: 600px;
+	height: 400px;
+	overflow: hidden;
+	z-index: 0;
+
+}
+
+.fadeslide div {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.fadeslide div:nth-of-type(1) {
+	animation: fadeslide 30s 0s infinite both;
+	z-index: 6;
+}
+
+.fadeslide div:nth-of-type(2) {
+	animation: fadeslide 30s 5s infinite both;
+	z-index: 5;
+}
+
+.fadeslide div:nth-of-type(3) {
+	animation: fadeslide 30s 10s infinite both;
+	z-index: 4;
+}
+
+.fadeslide div:nth-of-type(4) {
+	animation: fadeslide 30s 15s infinite both;
+	z-index: 3;
+}
+
+.fadeslide div:nth-of-type(5) {
+	animation: fadeslide 30s 20s infinite both;
+	z-index: 2;
+}
+
+.fadeslide div:nth-of-type(6) {
+	animation: fadeslide 30s 25s infinite both;
+	z-index: 1;
+}
+
+@keyframes fadeslide {
+	0% { left: 0; opacity: 0; }
+	5% { left: 0; opacity: 1; }
+	20% { left: 0; opacity: 1; }
+	25% { left: 0; opacity: 0; }
+	26% { left: 100%; opacity: 0; }
+	100% { left: 100%; opacity: 0; }
+}
+
+/*トップページのスライドショー終わり*/
+
+/*額縁のCSS始まり*/
+.huti1 {
+  border: 3px solid black;
+}
+
+.huti2 {
+  border: 3px solid #C1AB05;
+}
+
+.huti3 {
+  border: 9px solid black;
+}
+
+.huti4 {
+  border: 3px solid #C1AB05;
+  padding: 12px;
+  background-color: #fff;
+}
+/*額縁のCSS終わり*/
+
+/*額縁の下の黒い部分始まり*/
+.batman {
+  width: 100%;
+  display: flex;
+  justify-content:center;
+}
+
+.bat {
+  width: 150px;
+  height: 80px;
+  text-align:center;
+  background-color: black;
+  color: #fff;
+  margin-top: 20px;
+  padding: 10px;
+}
+/*額縁の下の黒い部分終わり*/
+
+/*トップページのCSS終わり*/
+
+/*AboutページのCSS始まり*/
+
+.about {
+  margin:30px auto;
+  width: 680px;
+  height:450px;
+  background-image: url('syehu');
+  border-radius: 20px;
+}
+
+.message-about {
+  color: black;
+  width: 620px;
+  padding: 90px 0 10px 240px;
+  float: right;
+}
+
+.message-about span {
+  font-size:1.2rem;
+}
+/*AboutページのCSS終わり*/
+
+
+
+.bat-show {
+  width: 400px;
+  height: auto;
+  background-color: black;
+  color: #fff;
+  margin-top: 20px;
+  padding: 10px 10px 15px;
+  text-align: center;
+}
+
+.bat-index {
+  width: 200px;
+  height: auto;
+  background-color: black;
+  color: #fff;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.review {
+  background-color: #EEEEEE;
+  color: black;
+
+}
+
+.nav-link{
+  color: white;
+
+}
+
+.heart{
+  color: white;
+}
+
+.show {
+  display: flex;
+  justify-content:center;
+  margin-top: 10px;
+}
+
+.index {
+  display: flex;
+  justify-content:center;
+  margin-top: 5px;
+}
+
+.image-box {
+  height: 100px;
+  width: 100px;
+  color:black;
+}
+
+.field_with_errors {
+  display: contents;
+}
+
+.kaminari {
+  display: flex;
+  justify-content:center;
+  margin-top: 10px;
+}
+

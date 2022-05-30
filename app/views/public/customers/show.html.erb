@@ -1,0 +1,69 @@
+<div class="container">
+  <h3 class="mini-title mb-3">MY PAGE</h3>
+
+ <div class="justify-content-center row">
+    <table class="table table-bordered table-background text-center" style="width: 800px">
+      <thead class="thead-dark col-lg-5">
+        <tr>
+          <th>名前</th>
+          <td class="bg-light col-lg-8">
+            <%= current_customer.last_name %>
+            <%= current_customer.first_name %>
+          </td>
+        </tr>
+        <tr>
+          <th>フリガナ</th>
+          <td class="bg-light">
+            <%= current_customer.last_name_kana %>
+            <%= current_customer.first_name_kana %>
+          </td>
+        </tr>
+        <tr>
+          <th>レビュー表示名</th>
+          <td class="bg-light">
+            <%= current_customer.nick_name %>
+          </td>
+        </tr>
+        <tr>
+          <th>郵便番号</th>
+          <td class="bg-light">
+            <%= current_customer.postcode %>
+          </td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td class="bg-light">
+            <%= current_customer.address %>
+          </td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td class="bg-light">
+            <%= current_customer.phone_number %>
+          </td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td class="bg-light">
+            <%= current_customer.email %>
+          </td>
+        </tr>
+      </thead>
+    </table>
+    <div class="justify-content-center row col-lg-6">
+      <%= link_to "会員情報を編集する", edit_customers_path, class: 'btn btn-success col-lg-5 mt-3' %>
+    </div>
+  </div>
+
+  <div class="justify-content-center row col-lg-12">
+  <div class="text-center mt-5">
+    <%= link_to deliveries_path, class: "btn mr-5 btn-outline-light btn-lg" do %>
+      <i class="fas fa-truck"></i> 配送先一覧を見る
+    <% end %>
+    <%= link_to orders_path, class: 'btn mr-5 btn-outline-light btn-lg' do %>
+      <i class="fas fa-history"></i> 注文履歴一覧を見る
+    <% end %>
+    <%= link_to favorites_customers_path, class: 'btn  btn-outline-light btn-lg' do %>
+      <i class="fas fa-heart"></i> いいねした商品
+    <% end %>
+  </div>

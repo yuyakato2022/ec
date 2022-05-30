@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row mt-5">
+    <h3 class="col-lg mini-title mb-3">新規配達先 登録</h3>
+  </div>
+  <%= render "layouts/errors", obj: @delivery %>
+
+  <div id="address_form">
+    <%= form_with model: @delivery, url: '/deliveries', method: :post do |f| %>
+      <div class="form-group row ml-5">
+        <%= f.label :postcode, '郵便番号（ハイフンなし）', class: "col-lg-4" %>
+        <%= f.text_field :postcode, class: "form-control col-lg-6" %>
+      </div>
+
+      <div class="form-group row ml-5">
+        <%= f.label :address, '住所', class: "col-lg-4" %>
+        <%= f.text_field :address, class: "form-control col-lg-6" %>
+      </div>
+
+      <div class="form-group row ml-5">
+        <%= f.label :address_name, '宛名', class: "col-lg-4" %>
+        <%= f.text_field :address_name, class: "form-control col-lg-6" %>
+      </div>
+
+      <div class="form-group  row justify-content-center offset-6">
+        <%= f.submit "新規登録", class: "btn btn-success col-lg-4" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row mt-5">
+    <h3 class="col-lg mini-title mb-5">登録配達先 一覧</h3>
+  </div>
+
+  <table class="table table-bordered table-background">
+    <thead class="thead-dark">
+      <tr>
+        <th class="col-lg-2">郵便番号</th>
+        <th class="col-lg-4">住所</th>
+        <th class="col-lg-2">宛名</th>
+        <th class="col-lg-4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @deliveries.each do |delivery| %>
+        <tr class="bg-light">
+          <td><%= delivery.postcode %></td>
+          <td><%= delivery.address %></td>
+          <td><%= delivery.address_name %></td>
+          <td>
+            <div class="d-flex justify-content-center">
+              <%= link_to '編集する', edit_delivery_path(delivery.id),  class: "btn btn-success" %>
+              <%= link_to '削除する', delivery_path(delivery.id), method: :delete, remote: true, class: "btn btn-danger offset-1" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

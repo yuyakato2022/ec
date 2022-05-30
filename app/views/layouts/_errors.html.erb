@@ -1,0 +1,16 @@
+<div class="row justify-content-center mb-5">
+  <div class="col-lg-8">
+    <% if obj.errors.any? %>
+      <div id="error_explanation">
+        <div class="border border-danger">
+          <h3 class="bg-danger text-center p-2"><%= pluralize(obj.errors.count, "件のエラー") %> </h3>
+            <ul>
+              <% obj.errors.full_messages.each do |message| %>
+                <li class="list-unstyled text-center"><%= message %></li>
+              <% end %>
+            </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

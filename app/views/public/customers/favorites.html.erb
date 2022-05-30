@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-lg-8">
+      <h3 class="mini-title">いいね一覧</h3>
+    </div>
+  </div>
+  <div class="row">
+      <% @favorite_item.each do |item|%>
+        <div class="col-lg-4 mb-5">
+          <div class="new_item">
+            <div class="tag">
+              <%= link_to item_path(item.id),class: "text-decoration-none" do %>
+                <div class="huti1">
+                <div class="huti2">
+                <div class="huti3">
+                <div class="huti4">
+                <%= image_tag item.get_image(200, 150) %>
+                </div>
+                </div>
+                </div>
+                </div>
+              <% end %>
+              <div class="index">
+                <div class="bat-index ">
+                  <p><%= item.name %></p>
+                  <p>￥<%= (item.price * 1.1).floor.to_s(:delimited) %>(税込み)</p>
+                  <div class="favorite-btn_<%= item.id %>">
+                    <%= render 'public/favorites/favorite', item: item %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+  </div>

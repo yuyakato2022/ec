@@ -1,0 +1,47 @@
+<div class="container">
+  <h3 class="mb-3">注文履歴一覧</h3>
+</div>
+<div class="container">
+  <div class="row col-12">
+    <table class="table table-bordered table-hover table-background">
+      <thead class="thead-dark">
+        <tr>
+          <th class="text-center">注文日</th>
+          <th class="text-center">配送先</th>
+          <th class="text-center">注文商品</th>
+          <th class="text-center">支払い金額</th>
+          <th class="text-center">ステータス</th>
+        </tr>
+      </thead>
+      <tbody class="bg-light">
+        <% @orders.each do |order| %>
+          <tr onclick='window.location="<%= '/orders/' + order.id.to_s %>"' role="link">
+            <td class="text-center">
+              <%= order.created_at.strftime('%Y/%m/%d') %><br>
+              <%= order.created_at.strftime('%H:%M') %>
+            </td>
+            <td class="text-center">
+              <%= order.postcode %><br>
+              <%= order.address %><br>
+              <%= order.address_name %>
+            </td>
+            <td class="text-center">
+              <% order.items.each do |item| %>
+                <%= item.name %><br>
+              <% end %>
+            </td>
+            <td style="text-align:right;">
+              ¥ <%= order.total_pay.to_s(:delimited) %>
+            </td>
+            <td class="text-center">
+              <%= order.status_i18n %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<div class="kaminari">
+<%= paginate @orders %>
+</div>
+</div>

@@ -1,0 +1,50 @@
+<containar>
+  <div class="row  offset-1 mt-5 mb-3">
+    <div class="col-lg-6">
+      <h3 class="mini-title">注文履歴一覧</h3>
+    </div>
+    <div class="col-4">
+      <div class="d-flex justify-content-end mb-4">
+        <%= form_tag(admin_path, method: :get) do %>
+
+          <%= select_tag :status, options_for_select({ "一覧" => "ichiran", "入金待ち" => "waiting", "入金確認" => "confirm", "製作中" => "production", "発送準備中" => "preparation", "発送完了" => "sent" }) %>
+          <%= submit_tag '検索する', class: "btn btn-info" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-5">
+    <div class="row mx-5">
+      <table class="table mx-5 table table-bordered table-hover table-background">
+        <thead class="thead-dark">
+          <tr>
+            <th style="width: 25%">購入日時</th>
+            <th style="width: 25%">購入者</th>
+            <th style="width: 25%">注文個数</th>
+            <th style="width: 25%">注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr onclick='window.location="<%= '/admin/orders/' + order.id.to_s %>"' role="link">
+              <td class="py-4">
+                <u><%= link_to order.created_at.strftime('%Y/%m/%d　%H:%M:%S'), admin_order_path(order.id), class:"text-dark" %></u>
+              </td>
+              <td class="py-4">
+                <%= order.customer.last_name + order.customer.first_name %>
+              </td>
+              <td  class="py-4">
+                <%= order.order_details.inject(0) { |sum, order_detail| sum + order_detail.quantity } %>
+              </td>
+              <td  class="py-4">
+                <%= order.status_i18n %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= paginate @orders %>
+<containar>

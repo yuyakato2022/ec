@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NaganoCake</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <div class="row  mx-auto col-xl">
+            <a class="navbar-brand" href="/"><%= image_tag 'logo-syefu (3)' %></a>
+           <% if admin_signed_in? %>
+           <!--ログインしている時-->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <%=  link_to admin_items_path, class: 'nav-link' do %>
+                    <i class="fas fa-beer"></i> 商品一覧
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to admin_customers_path, class: 'nav-link' do %>
+                    <i class="fas fa-beer"></i> 会員一覧
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%=  link_to admin_path ,class: 'nav-link' do %>
+                    <i class="fas fa-beer"></i> 注文履歴一覧
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to admin_genres_path, class: 'nav-link' do %>
+                    <i class="fas fa-beer"></i> ジャンル一覧
+                  <% end %>
+                </li>
+                 <li class="nav-item active">
+                  <%= link_to destroy_admin_session_path, method: :delete,class: 'nav-link' do %>
+                    <i class="fas fa-sign-out-alt"></i> ログアウト
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+           <% else %>
+           <!--ログインしていない時-->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <%= link_to about_path, class: 'nav-link' do %>
+                    <i class="fas fa-beer"></i> ABOUT
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to items_path, class: 'nav-link' do %>
+                    <i class="fas fa-heart"></i> PRODUCTS
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to new_customer_registration_path, class: 'nav-link' do %>
+                    <i class="fas fa-user-plus"></i> SIGN UP
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to new_customer_session_path, class: 'nav-link' do %>
+                    <i class="fas fa-sign-in-alt"></i> LOG IN
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div id="flash-success">
+      <%=render "layouts/notice" %>
+    </div>
+
+    <%= yield %>
+
+  </body>
+</html>
+

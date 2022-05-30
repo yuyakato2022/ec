@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-lg-8">
+      <h3 class="mini-title">ショッピングカート</h3>
+    </div>
+    <div class="col-lg-4 text-right">
+      <%= link_to cart_item_cart_items_destroy_all_path(current_customer.cart_items), class:"btn btn-danger btn-lg", method: :delete do %>
+        <i class="fas fa-trash-alt"></i> カートを空にする
+      <% end %>
+    </div>
+  </div>
+
+  <div class"row">
+    <table class="table table-bordered table-background text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th class="col-lg-4">商品名</th>
+          <th class="col-lg-2">単価（税込）</th>
+          <th class="col-lg-2">数量</th>
+          <th class="col-lg-2">小計</th>
+          <th class="col-lg-2"></th>
+        </tr>
+      </thead>
+      <% @cart_items.each do |cart_item| %>
+      <tbody class="bg-light">
+        <tr>
+          <td class="text-left"><%= image_tag cart_item.item.get_image(100,100) %>　<%= cart_item.item.name %></td>
+          <td class="text-right">¥ <%= (cart_item.item.price* 1.1).floor.to_s(:delimited) %></td>
+          <td>
+            <%= form_with model:cart_item, method: :patch, local:true do |f| %>
+              <div class="form-group d-flex justify-content-center mt-3">
+                <%= f.select :quantity, *[1..100] %>
+                <%= f.submit "変更", class: 'btn btn-success' %>
+              </div>
+            <% end %>
+          </td>
+          <td class="text-right">¥ <%= ((cart_item.item.price* 1.1).floor*cart_item.quantity).to_s(:delimited) %></td>
+          <td>
+            <div class="d-flex justify-content-center mt-3">
+              <%= link_to '削除', cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="row mt-3 justify-content-end">
+    <div class="col-lg-3">
+      <table class="table table-bordered table-background">
+        <thead class="thead-dark">
+          <tr><th class="text-center">合 計</th></tr>
+          <tr><td class="bg-light text-right">¥ <%= @total_price.to_s(:delimited) %></td></tr>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-5 mb-5 justify-content-center ">
+    <div class="col-lg-4">
+      <%= link_to root_path, class:"btn btn-primary btn-lg" do %>
+        <i class="fas fa-shopping-cart"></i> 買い物を続ける
+      <% end %>
+    </div>
+    <div class="col-lg-4">
+      <%= link_to new_order_path(current_customer), class:"btn btn-success btn-lg" do %>
+        <i class="fas fa-file-alt"></i> 情報入力に進む
+      <% end %>
+    </div>
+  </div>
+</div>
